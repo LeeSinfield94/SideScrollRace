@@ -10,9 +10,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
 
     [SerializeField] private NetworkPrefabRef playerPrefab;
-    [SerializeField] private Transform playerPrefabSpawnLocation;
     [SerializeField] private GameObject playerFloor;
 
+    private Transform playerPrefabSpawnLocation;
     private NetworkRunner runner;
     private Dictionary<PlayerRef, NetworkObject> spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
 
@@ -93,11 +93,16 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         // Create a unique position for the player
-        GameObject newFloor = Instantiate(playerFloor, new Vector3(0, -1, 0), Quaternion.identity);
+        GameObject newFloor = Instantiate(playerFloor, new Vector3(player.PlayerId * 20, -1, 0), Quaternion.identity);
         newFloor.name = player.PlayerId + "Floor";
+        playerPrefabSpawnLocation = newFloor.GetComponentInChildren<SpawnLocation>().transform;
         NetworkObject networkPlayerObject = runner.Spawn(playerPrefab, playerPrefabSpawnLocation.position, Quaternion.identity, player);
         // Keep track of the player avatars so we can remove it when they disconnect
         spawnedCharacters.Add(player, networkPlayerObject);
+        if(networkPlayerObject.HasInputAuthority)
+        {
+            Camera.main.GetComponent<CameraFollow>().Init(networkPlayerObject.transform);
+        }
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
