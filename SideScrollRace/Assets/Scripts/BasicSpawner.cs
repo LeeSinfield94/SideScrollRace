@@ -12,6 +12,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     [SerializeField] private NetworkPrefabRef playerPrefab;
     [SerializeField] private GameObject playerFloor;
 
+    private bool PButton = false;
     private Transform playerPrefabSpawnLocation;
     private NetworkRunner runner;
     private Dictionary<PlayerRef, NetworkObject> spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
@@ -45,7 +46,10 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
         });
     }
-
+    private void Update()
+    {
+        PButton = PButton | Input.GetKey(KeyCode.P);
+    }
     public void OnConnectedToServer(NetworkRunner runner)
     {
     }
@@ -82,6 +86,11 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         {
             data.direction -= Vector3.forward;
         }
+        if (PButton)
+        {
+            data.buttons |= NetworkInputData.P;
+        }
+        PButton = false;
 
         input.Set(data);
     }
