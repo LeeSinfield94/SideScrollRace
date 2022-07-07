@@ -77,14 +77,21 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         var data = new NetworkInputData();
-
-        if (Input.GetKey(KeyCode.W))
+        if(!data.canMoveForward)
         {
             data.direction += Vector3.forward;
         }
-        if(Input.GetKey(KeyCode.S))
+        else
         {
-            data.direction -= Vector3.forward;
+            print("Can't Move Forward");
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            data.direction += Vector3.left;
+        }
+        if(Input.GetKey(KeyCode.D))
+        {
+            data.direction -= Vector3.left;
         }
         if (PButton)
         {
