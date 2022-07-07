@@ -12,10 +12,7 @@ public class Player : NetworkBehaviour
     {
         cc = GetComponent<NetworkCharacterControllerPrototype>();
     }
-    private void Start()
-    {
-        canMoveForward = true;
-    }
+
     public override void FixedUpdateNetwork()
     {
         if (GetInput(out NetworkInputData data))

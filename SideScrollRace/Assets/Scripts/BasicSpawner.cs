@@ -77,6 +77,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         var data = new NetworkInputData();
+
         if(!data.canMoveForward)
         {
             data.direction += Vector3.forward;
