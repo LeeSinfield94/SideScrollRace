@@ -78,14 +78,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         var data = new NetworkInputData();
 
-        if(!data.canMoveForward)
-        {
-            data.direction += Vector3.forward;
-        }
-        else
-        {
-            print("Can't Move Forward");
-        }
         if (Input.GetKey(KeyCode.A))
         {
             data.direction += Vector3.left;
@@ -101,6 +93,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         PButton = false;
 
         input.Set(data);
+
     }
 
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)

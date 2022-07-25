@@ -8,7 +8,7 @@ public class SpikeObstacle : BaseObstacle
     {
         if(player != null)
         {
-            player.CanMoveForward = true;
+            player.CanMoveForward = false;
         }
     }
 
@@ -16,7 +16,7 @@ public class SpikeObstacle : BaseObstacle
     {
         if (player != null)
         {
-            player.CanMoveForward = false;
+            player.CanMoveForward = true;
         }
     }
 }
