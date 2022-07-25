@@ -150,9 +150,9 @@ MonoBehaviour:
     RotBlendStart: 0.1
     RotBlendEnd: 0.5
     RotTeleportRadians: 1.5
-  gravity: -20
+  gravity: 0
   jumpImpulse: 8
-  acceleration: 10
+  acceleration: 6
   braking: 10
   maxSpeed: 2
   rotationSpeed: 15
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  startSpeed: 6
 --- !u!1 &1391973241900778459
 GameObject:
   m_ObjectHideFlags: 0

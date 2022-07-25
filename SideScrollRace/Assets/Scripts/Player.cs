@@ -2,6 +2,10 @@ using Fusion;
 using UnityEngine;
 public class Player : NetworkBehaviour
 {
+    [SerializeField] private float startSpeed;
+    private float slowSpeed = 2;
+
+
     private NetworkCharacterControllerPrototype cc;
     private bool canMoveForward = true;
     public bool CanMoveForward
@@ -13,8 +17,15 @@ public class Player : NetworkBehaviour
     private void Awake()
     {
         cc = GetComponent<NetworkCharacterControllerPrototype>();
+        cc.acceleration = startSpeed;
+        cc.maxSpeed = startSpeed;
     }
 
+    public void SetSpeed(bool isSlow)
+    {
+        cc.acceleration = isSlow ? slowSpeed : startSpeed;
+        cc.maxSpeed = isSlow ? slowSpeed : startSpeed;
+    }
     private void Update()
     {
         if (canMoveForward)
