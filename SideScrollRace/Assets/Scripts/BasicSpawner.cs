@@ -113,6 +113,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         {
             Camera.main.GetComponent<CameraFollow>().Init(networkPlayerObject.transform);
         }
+        GameManager.StartTimer();
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)

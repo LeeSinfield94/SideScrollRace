@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static void StartTimer()
+    {
+        RaceTimer.StartTimer = true;
+    }
     public static float GetPlayersCurrentTime(Player player)
     {
         float time;

@@ -3,6 +3,8 @@ using UnityEngine;
 public class Player : NetworkBehaviour
 {
     [SerializeField] private float startSpeed;
+    [SerializeField] private PlayerFloor myFloor;
+
     private float slowSpeed = 2;
 
 
@@ -35,6 +37,11 @@ public class Player : NetworkBehaviour
         else
         {
             currentForward = new Vector3(0, 0, 0);
+        }
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            myFloor.SpawnSlowObstacleOnFloor();
         }
     }
     public override void FixedUpdateNetwork()

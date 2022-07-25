@@ -172,6 +172,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   startSpeed: 6
+  obstacleType:
+    spikeObstacle: {fileID: 8821130895318198195, guid: 9adae4f7a93bd1d4cb9f3689057f8414, type: 3}
+    slowObstacle: {fileID: 6670837148533122407, guid: b135efe1cf05a3f40b3c6998f4746ef4, type: 3}
+  myFloor: {fileID: 6028243303019985531, guid: 8230907d4338e174bb288e1f9c86d38d, type: 3}
 --- !u!1 &1391973241900778459
 GameObject:
   m_ObjectHideFlags: 0
