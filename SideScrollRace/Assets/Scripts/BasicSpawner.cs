@@ -10,13 +10,13 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
 
     [SerializeField] private NetworkPrefabRef playerPrefab;
-    [SerializeField] private GameObject playerFloor;
 
+    private PlayerFloor[] floors;
     private bool PButton = false;
     private Transform playerPrefabSpawnLocation;
     private NetworkRunner runner;
     private Dictionary<PlayerRef, NetworkObject> spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
-
+    private int numberOfPlayersJoined;
     private void OnGUI()
     {
         if (runner == null)
@@ -36,7 +36,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         // Create the Fusion runner and let it know that we will be providing user input
         runner = gameObject.AddComponent<NetworkRunner>();
         runner.ProvideInput = true;
-
+        floors = GameObject.FindObjectsOfType<PlayerFloor>();
         // Start or join (depends on gamemode) a session with a specific name
         await runner.StartGame(new StartGameArgs()
         {
@@ -102,10 +102,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        // Create a unique position for the player
-        GameObject newFloor = Instantiate(playerFloor, new Vector3(player.PlayerId * 20, -1, 0), Quaternion.identity);
-        newFloor.name = player.PlayerId + "Floor";
-        playerPrefabSpawnLocation = newFloor.GetComponentInChildren<SpawnLocation>().transform;
+        numberOfPlayersJoined++;
+        playerPrefabSpawnLocation = floors[numberOfPlayersJoined - 1].GetComponentInChildren<SpawnLocation>().transform;
         NetworkObject networkPlayerObject = runner.Spawn(playerPrefab, playerPrefabSpawnLocation.position, Quaternion.identity, player);
         // Keep track of the player avatars so we can remove it when they disconnect
         spawnedCharacters.Add(player, networkPlayerObject);

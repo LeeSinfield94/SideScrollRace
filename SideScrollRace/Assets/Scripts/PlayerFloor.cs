@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerFloor : NetworkBehaviour
 {
     [SerializeField] private ObstacleType obstacleType;
+    private Player myPlayer;
     public void SpawnSlowObstacleOnFloor()
     {
-        GameObject go = Instantiate(obstacleType.slowObstacle).gameObject;
-        go.transform.SetParent(this.transform);
+        SlowObstacle go = Instantiate<SlowObstacle>(obstacleType.slowObstacle, transform);
     }
 }

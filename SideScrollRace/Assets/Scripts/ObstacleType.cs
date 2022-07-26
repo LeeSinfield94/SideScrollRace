@@ -5,6 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public struct ObstacleType
 {
-    public Transform spikeObstacle;
-    public Transform slowObstacle;
+    public SpikeObstacle spikeObstacle;
+    public SlowObstacle slowObstacle;
 }
