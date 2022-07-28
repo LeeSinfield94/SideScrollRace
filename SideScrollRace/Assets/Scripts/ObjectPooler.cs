@@ -8,6 +8,7 @@ public struct ObjectsToSpawn
 {
     public int amountToSpawn;
     public GameObject objectToSpawn;
+    public Transform parent;
 }
 public class ObjectPooler : MonoBehaviour
 {
@@ -20,13 +21,13 @@ public class ObjectPooler : MonoBehaviour
     {
         instance = this;
     }
-    public void SpawnObjects()
+    public void Start()
     {
         foreach(ObjectsToSpawn objectToSpawn in objectsToSpawn)
         {
             for(int i = 0; i < objectToSpawn.amountToSpawn; i++)
             {
-                GameObject go = Instantiate(objectToSpawn.objectToSpawn);
+                GameObject go = Instantiate(objectToSpawn.objectToSpawn, objectToSpawn.parent);
                 AddToList(go);
                 go.SetActive(false);
             }

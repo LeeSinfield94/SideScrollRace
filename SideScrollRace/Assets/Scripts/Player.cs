@@ -9,10 +9,6 @@ public class Player : NetworkBehaviour
         set 
         { 
             myFloor = value;
-            if(myFloor != null)
-            {
-                myFloor.GetObjects();
-            }
         }
     }
     private float slowSpeed = 2;
