@@ -52,13 +52,17 @@ public class Player : NetworkBehaviour
         {
             currentForward = new Vector3(0, 0, 0);
         }
-
-        //To be done using UI elements
-        //if(Input.GetKeyDown(KeyCode.O))
-        //{
-        //    opponentsFloor.SpawnObstacleOnFloor(ObstacleType.SLOW);
-        //}
     }
+
+    public void SpawnSpikeForOtherPlayer()
+    {
+        opponentsFloor.SpawnObstacleOnFloor(ObstacleType.SPIKE);
+    }
+    public void SpawnSlowForOtherPlayer()
+    {
+        opponentsFloor.SpawnObstacleOnFloor(ObstacleType.SLOW);
+    }
+
     public override void FixedUpdateNetwork()
     {
         if (GetInput(out NetworkInputData data))
