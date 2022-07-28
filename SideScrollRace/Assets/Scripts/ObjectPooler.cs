@@ -44,23 +44,23 @@ public class ObjectPooler : MonoBehaviour
             spikeObjects.Add(go);
         }
     }
-    public GameObject GetObject(ObstacleType type)
+    public GameObject GetObject(ObstacleType type, PlayerFloor floor)
     {
         switch (type)
         {
             case ObstacleType.SLOW:
-                return GetSlowObject();
+                return GetSlowObject(floor);
             case ObstacleType.SPIKE:
-                return GetSpikeObject();
+                return GetSpikeObject(floor);
         }
         return null;
     }
 
-    public GameObject GetSlowObject()
+    public GameObject GetSlowObject(PlayerFloor floor)
     {
         for(int i = 0; i < slowObjects.Count; i++)
         {
-            if(!slowObjects[i].activeInHierarchy)
+            if(!slowObjects[i].activeInHierarchy && slowObjects[i].transform.parent == floor.transform)
             {
                 return slowObjects[i];
             }
@@ -68,7 +68,7 @@ public class ObjectPooler : MonoBehaviour
         return null;
     }
 
-    public GameObject GetSpikeObject()
+    public GameObject GetSpikeObject(PlayerFloor floor)
     {
         for (int i = 0; i < spikeObjects.Count; i++)
         {

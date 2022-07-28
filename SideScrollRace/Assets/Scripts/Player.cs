@@ -4,11 +4,19 @@ public class Player : NetworkBehaviour
 {
     [SerializeField] private float startSpeed;
     [SerializeField] private PlayerFloor myFloor;
+    [SerializeField] private PlayerFloor opponentsFloor;
     public PlayerFloor MyFloor
     {
         set 
         { 
             myFloor = value;
+        }
+    }
+    public PlayerFloor OpponentsFloor
+    {
+        set
+        {
+            opponentsFloor = value;
         }
     }
     private float slowSpeed = 2;
@@ -45,10 +53,11 @@ public class Player : NetworkBehaviour
             currentForward = new Vector3(0, 0, 0);
         }
 
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            myFloor.SpawnObstacleOnFloor(ObstacleType.SLOW);
-        }
+        //To be done using UI elements
+        //if(Input.GetKeyDown(KeyCode.O))
+        //{
+        //    opponentsFloor.SpawnObstacleOnFloor(ObstacleType.SLOW);
+        //}
     }
     public override void FixedUpdateNetwork()
     {

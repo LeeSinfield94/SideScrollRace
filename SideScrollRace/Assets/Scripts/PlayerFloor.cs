@@ -10,8 +10,7 @@ public class PlayerFloor : NetworkBehaviour
     
     public void SpawnObstacleOnFloor(ObstacleType type)
     {
-        GameObject go = ObjectPooler.instance.GetObject(type);
-        go.SetActive(true);
-        go.transform.SetParent(this.transform);
+        GameObject go = ObjectPooler.instance.GetObject(type, this);
+        go.SetActive(true); 
     }
 }

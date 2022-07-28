@@ -11,12 +11,11 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     [SerializeField] private NetworkPrefabRef playerPrefab;
 
-    private PlayerFloor[] floors;
+    private List<PlayerFloor> floors = new List<PlayerFloor>();
     private bool PButton = false;
     private Transform playerPrefabSpawnLocation;
     private NetworkRunner runner;
     private Dictionary<PlayerRef, NetworkObject> spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
-    private int numberOfPlayersJoined;
     private void OnGUI()
     {
         if (runner == null)
@@ -36,7 +35,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         // Create the Fusion runner and let it know that we will be providing user input
         runner = gameObject.AddComponent<NetworkRunner>();
         runner.ProvideInput = true;
-        floors = GameObject.FindObjectsOfType<PlayerFloor>();
+        floors.AddRange(GameObject.FindObjectsOfType<PlayerFloor>());
         // Start or join (depends on gamemode) a session with a specific name
         await runner.StartGame(new StartGameArgs()
         {
@@ -102,10 +101,11 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        numberOfPlayersJoined++;
-        playerPrefabSpawnLocation = floors[numberOfPlayersJoined].GetComponentInChildren<SpawnLocation>().transform;
+        playerPrefabSpawnLocation = floors[0].GetComponentInChildren<SpawnLocation>().transform;
         NetworkObject networkPlayerObject = runner.Spawn(playerPrefab, playerPrefabSpawnLocation.position, Quaternion.identity, player);
-        networkPlayerObject.GetComponent<Player>().MyFloor = floors[numberOfPlayersJoined];
+        networkPlayerObject.GetComponent<Player>().MyFloor = floors[0];
+        floors.Remove(floors[0]);
+        networkPlayerObject.GetComponent<Player>().OpponentsFloor = floors[0];
 
         // Keep track of the player avatars so we can remove it when they disconnect
         spawnedCharacters.Add(player, networkPlayerObject);
