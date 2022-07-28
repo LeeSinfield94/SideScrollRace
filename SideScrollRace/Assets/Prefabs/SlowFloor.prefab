@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1558317362103777553}
   m_Layer: 0
   m_Name: SlowFloor
-  m_TagString: Untagged
+  m_TagString: Slow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

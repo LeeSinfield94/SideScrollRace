@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct ObstacleType
+public enum ObstacleType
 {
-    public SpikeObstacle spikeObstacle;
-    public SlowObstacle slowObstacle;
+    SPIKE,
+    SLOW
 }

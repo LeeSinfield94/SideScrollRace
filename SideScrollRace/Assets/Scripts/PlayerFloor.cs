@@ -7,8 +7,9 @@ public class PlayerFloor : NetworkBehaviour
 {
     [SerializeField] private ObstacleType obstacleType;
     private Player myPlayer;
-    public void SpawnSlowObstacleOnFloor()
+    
+    public void SpawnObstacleOnFloor(ObstacleType type)
     {
-        SlowObstacle go = Instantiate<SlowObstacle>(obstacleType.slowObstacle, transform);
+        GameObject go = ObjectPooler.instance.GetObject(type);
     }
 }

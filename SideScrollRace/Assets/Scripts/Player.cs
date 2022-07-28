@@ -41,7 +41,7 @@ public class Player : NetworkBehaviour
 
         if(Input.GetKeyDown(KeyCode.O))
         {
-            myFloor.SpawnSlowObstacleOnFloor();
+            myFloor.SpawnObstacleOnFloor(ObstacleType.SLOW);
         }
     }
     public override void FixedUpdateNetwork()
