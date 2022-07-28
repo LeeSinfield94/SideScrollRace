@@ -4,7 +4,17 @@ public class Player : NetworkBehaviour
 {
     [SerializeField] private float startSpeed;
     [SerializeField] private PlayerFloor myFloor;
-
+    public PlayerFloor MyFloor
+    {
+        set 
+        { 
+            myFloor = value;
+            if(myFloor != null)
+            {
+                myFloor.GetObjects();
+            }
+        }
+    }
     private float slowSpeed = 2;
 
 

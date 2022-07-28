@@ -105,6 +105,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         numberOfPlayersJoined++;
         playerPrefabSpawnLocation = floors[numberOfPlayersJoined - 1].GetComponentInChildren<SpawnLocation>().transform;
         NetworkObject networkPlayerObject = runner.Spawn(playerPrefab, playerPrefabSpawnLocation.position, Quaternion.identity, player);
+        networkPlayerObject.GetComponent<Player>().MyFloor = floors[numberOfPlayersJoined - 1];
+
         // Keep track of the player avatars so we can remove it when they disconnect
         spawnedCharacters.Add(player, networkPlayerObject);
         if(networkPlayerObject.HasInputAuthority)

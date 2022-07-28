@@ -111,9 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  obstacleType:
-    spikeObstacle: {fileID: 8821130895318198199, guid: 9adae4f7a93bd1d4cb9f3689057f8414, type: 3}
-    slowObstacle: {fileID: 1558317362103777553, guid: b135efe1cf05a3f40b3c6998f4746ef4, type: 3}
+  obstacleType: 0
 --- !u!114 &6641232537665716542
 MonoBehaviour:
   m_ObjectHideFlags: 0

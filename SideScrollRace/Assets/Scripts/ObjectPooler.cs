@@ -20,7 +20,7 @@ public class ObjectPooler : MonoBehaviour
     {
         instance = this;
     }
-    private void Start()
+    public void SpawnObjects()
     {
         foreach(ObjectsToSpawn objectToSpawn in objectsToSpawn)
         {
@@ -57,11 +57,25 @@ public class ObjectPooler : MonoBehaviour
 
     public GameObject GetSlowObject()
     {
+        for(int i = 0; i < slowObjects.Count; i++)
+        {
+            if(!slowObjects[i].activeInHierarchy)
+            {
+                return slowObjects[i];
+            }
+        }
         return null;
     }
 
     public GameObject GetSpikeObject()
     {
+        for (int i = 0; i < spikeObjects.Count; i++)
+        {
+            if (!spikeObjects[i].activeInHierarchy)
+            {
+                return spikeObjects[i];
+            }
+        }
         return null;
     }
 }
